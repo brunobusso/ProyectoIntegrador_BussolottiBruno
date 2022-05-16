@@ -3,8 +3,14 @@ package com.portfolio.bb.Controller;
 import com.portfolio.bb.Entity.Persona;
 import com.portfolio.bb.Interface.IPersonaService;
 import java.util.List;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,4 +21,36 @@ public class PersonaController {
     public List<Persona> getPersona(){
         return ipersonaservice.getPersona();
     }
+    
+    @PostMapping("/personas/crear")
+    public String createPersona(@RequestBody Persona persona){
+        ipersonaservice.savePersona(persona);
+        return "La persona fue creada correctamente";
+    }
+    
+    @DeleteMapping("/personas/borrar/{id}")
+    public String deletePersona(@PathVariable Long id){
+        ipersonaservice.deletePersona(id);
+        return "La persona fue eliminada correctamente";
+    }
+    
+    @PutMapping("/personas/editar/{id}")
+    public Persona editPersona(@PathVariable Long id,
+                                                 @PathParam("nombre") String nuevoNombre,
+                                                 @PathParam("apellido") String nuevoApellido,
+                                                 @PathParam("img") String nuevoimg){
+    
+        
+    
+                   Persona persona =  ipersonaservice.findPersona(id);
+                   
+                   persona.setNombre(nuevoNombre);
+                   persona.setApellido(nuevoApellido);
+                   persona.setImg(nuevoimg);
+                   
+                    ipersonaservice.savePersona(persona);
+                    return persona;
+
+    }
+    
 }
