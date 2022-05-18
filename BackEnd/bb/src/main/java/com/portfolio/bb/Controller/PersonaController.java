@@ -52,5 +52,4 @@ public class PersonaController {
                     return persona;
 
     }
-    
 }
