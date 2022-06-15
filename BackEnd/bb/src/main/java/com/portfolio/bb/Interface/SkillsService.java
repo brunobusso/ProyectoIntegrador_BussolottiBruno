@@ -6,7 +6,7 @@ import java.util.List;
 public interface SkillsService {
     
        
-    public List<Skills>getPersona();
+ 
     
  
     public void saveSkills(Skills skills);
@@ -16,4 +16,6 @@ public interface SkillsService {
     
   
     public Skills findSkills(Long id);
+
+    public List<Skills> getSkills();
 }

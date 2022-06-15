@@ -15,7 +15,7 @@ public class ImpSkillsService implements SkillsService {
    
     
     @Override
-    public List<Skills> getPersona() {
+    public List<Skills> getSkills() {
        List <Skills> skills = skillsRepository.findAll();
        return skills;
     }
